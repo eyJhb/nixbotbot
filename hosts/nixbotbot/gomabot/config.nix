@@ -152,7 +152,7 @@ let
 
     nixEvalAddRepl = customWriteShellScript "nix-eval-add-repl" [ pkgs.gawk ] ''
       REPL_KEY="$(echo "$MESSAGE_STRIP" | cut -d '=' -f1 | awk '{$1=$1;print}')"
-      REPL_VAL="$(echo "$MESSAGE_STRIP" | cut -d '=' -f2 | awk '{$1=$1;print}')"
+      REPL_VAL="$(echo "$MESSAGE_STRIP" | cut -d '=' -f2- | awk '{$1=$1;print}')"
 
       if [ ! "$REPL_KEY" ]; then
         echo "Key cannot be empty"
