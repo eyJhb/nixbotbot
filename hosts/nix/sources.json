@@ -1,0 +1,26 @@
+{
+    "disko": {
+        "branch": "master",
+        "description": "Declarative disk partitioning and formatting using nix [maintainer=@Lassulus]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "e972a78f4a49cd92075d64b6feeef64d26bf2996",
+        "sha256": "0mqwavw0wnjpna9ymwrdhalshgw9qwz554zicwg9c2xll8wdjd8c",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/disko/archive/e972a78f4a49cd92075d64b6feeef64d26bf2996.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "nixos-unstable",
+        "description": "Nix Packages collection",
+        "homepage": null,
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "062ca2a9370a27a35c524dc82d540e6e9824b652",
+        "sha256": "0gdi0awmqd14ii472ghxh1f2q6br0qq359i35jsw9zd30d8l1ian",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/062ca2a9370a27a35c524dc82d540e6e9824b652.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}
