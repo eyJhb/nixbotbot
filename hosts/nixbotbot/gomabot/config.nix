@@ -275,6 +275,9 @@ in {
     };
   };
 
+  # enable for search of options and packages
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
   systemd.services.matrix-bot = {
     # setup the cache dir
     environment.XDG_CACHE_HOME = cacheDir;
