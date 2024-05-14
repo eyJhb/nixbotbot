@@ -41,7 +41,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    mine.matrix-bot.settings.statedir = "/var/lib/${cfg.stateDir}";
+    mine.matrix-bot.settings.StateDir = "/var/lib/${cfg.stateDir}";
 
     users.users.matrix-bot = {
       isSystemUser = true;
