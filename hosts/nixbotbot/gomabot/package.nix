@@ -6,15 +6,7 @@ in pkgs.buildGoModule rec {
   pname = "mautrix-bot";
   version = "unstable";
 
-  # src = lib.cleanSource ./../../../botsrc;
-  src = ./../../../botsrc;
-  # src = pkgs.fetchGithub {
-  #   owner = "eyjhb";
-  #   repo = "gomabot";
-  #   version = "0b75d6545f124945e369618f0fa58a6512836025";
-  #   sha256 = "0000000000000000000000000000000000000000000000000000";
-  # };
-  # proxyVendor = true;
+  src = lib.cleanSource ./../../../botsrc;
 
   buildInputs = with pkgs; [
     olm
@@ -22,5 +14,5 @@ in pkgs.buildGoModule rec {
     nix
   ];
 
-  vendorHash= "sha256-gPk4Yl2nMOak64Aa/f6j7WC1njNlyHVwiPnNUQ1fBl4=";
+  vendorHash= "sha256-CgProDg+GNZHNhd6dHO5aHXL43ZiEqOVr7CHhn7BiB4=";
 }

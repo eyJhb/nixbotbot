@@ -65,7 +65,7 @@ in {
       };
 
       script = ''
-        ${cfg.package}/bin/gomabot -config ${configFile}
+        ${cfg.package}/bin/botsrc -config ${configFile}
       '';
 
       description = "matrix-bot - simple script bot";

@@ -9,6 +9,7 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/eyJhb/gomabot/gomabot"
 	"github.com/eyJhb/nixbotbot/botsrc/nixbot"
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
