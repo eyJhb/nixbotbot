@@ -3,6 +3,7 @@ module github.com/eyJhb/nixbotbot/botsrc
 go 1.22.3
 
 require (
+	github.com/adrg/strutil v0.3.1
 	github.com/eyJhb/gomabot v0.0.0-20240531151840-007ec63a476c
 	github.com/hbollon/go-edlib v1.6.0
 	github.com/rs/zerolog v1.33.0

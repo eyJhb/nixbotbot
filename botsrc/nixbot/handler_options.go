@@ -7,7 +7,8 @@ import (
 	"sort"
 	"text/template"
 
-	"github.com/hbollon/go-edlib"
+	"github.com/adrg/strutil"
+	"github.com/adrg/strutil/metrics"
 	"maunium.net/go/mautrix"
 	"maunium.net/go/mautrix/event"
 )
@@ -59,26 +60,7 @@ func (nb *NixBot) CommandHandlerSearchOptions(ctx context.Context, client *mautr
 		return err
 	}
 
-	// fuzzy search all the options
-	var nixOptionKeys []string
-	for k := range nixOptions {
-		nixOptionKeys = append(nixOptionKeys, k)
-	}
-
-	res, err := edlib.FuzzySearchSet(search, nixOptionKeys, NixSearchOptionsLimit, edlib.Levenshtein)
-	if err != nil {
-		return err
-	}
-
-	var filteredOptions []NixOptionName
-	for _, k := range res {
-		if v, ok := nixOptions[k]; ok {
-			filteredOptions = append(filteredOptions, NixOptionName{Name: k, NixOption: v})
-		}
-
-	}
-
-	sort.Slice(filteredOptions, func(i, j int) bool { return filteredOptions[i].Name < filteredOptions[j].Name })
+	filteredOptions := nb.NixOptionsFuzzySearch(search, nixOptions, 10)
 
 	// execute template
 	var buf bytes.Buffer
@@ -106,25 +88,33 @@ func (nb *NixBot) CommandHandlerSearchOption(ctx context.Context, client *mautri
 		return err
 	}
 
-	// make a list of strings from map values
-	var nixOptionKeys []string
-	for k := range nixOptions {
-		nixOptionKeys = append(nixOptionKeys, k)
-	}
-
-	res, err := edlib.FuzzySearch(search, nixOptionKeys, edlib.Levenshtein)
-	if err != nil {
-		return err
-	}
+	filteredOption := nb.NixOptionsFuzzySearch(search, nixOptions, 1)[0]
 
 	var buf bytes.Buffer
-	err = tmplNixOption.Execute(&buf, NixOptionName{
-		Name:      res,
-		NixOption: nixOptions[res],
-	})
+	err = tmplNixOption.Execute(&buf, filteredOption)
 	if err != nil {
 		return err
 	}
 
-	return nb.SendMarkdownReplySummary(ctx, client, evt, buf.Bytes(), html.EscapeString(res))
+	return nb.SendMarkdownReplySummary(ctx, client, evt, buf.Bytes(), html.EscapeString(filteredOption.Name))
+}
+
+func (nb *NixBot) NixOptionsFuzzySearch(search string, nixOptions map[string]NixOption, limit int) []NixOptionName {
+	// fuzzy search all the options
+	var nixOptionKeys []NixOptionName
+	for k, v := range nixOptions {
+		nixOptionKeys = append(nixOptionKeys, NixOptionName{Name: k, NixOption: v})
+	}
+
+	sort.Slice(nixOptionKeys, func(i, j int) bool {
+		s1 := strutil.Similarity(search, nixOptionKeys[i].Name, metrics.NewSmithWatermanGotoh())
+		s2 := strutil.Similarity(search, nixOptionKeys[j].Name, metrics.NewSmithWatermanGotoh())
+		return s1 > s2
+	})
+
+	if limit > len(nixOptionKeys) {
+		return nixOptionKeys
+	}
+
+	return nixOptionKeys[:limit]
 }
