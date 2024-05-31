@@ -4,8 +4,8 @@ github.com/coreos/go-systemd/v22 v22.5.0/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSV
 github.com/creack/pty v1.1.9/go.mod h1:oKZEueFk5CKHvIhNR5MUki03XCEU+Q6VDXinZuGJ33E=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/eyJhb/gomabot v0.0.0-20240531150356-7104ac2b5324 h1:OXXv7HbSwO6OjOce9Lg+qbfdXXysxKSAHq8+F/j8p98=
-github.com/eyJhb/gomabot v0.0.0-20240531150356-7104ac2b5324/go.mod h1:42YFIxd/Vv0wdG5at9qmSxU0H0xWdyviKLVG99OAJYI=
+github.com/eyJhb/gomabot v0.0.0-20240531151840-007ec63a476c h1:M4NvRnUPQNLJN4C61Y7Ca0n4US2YlMJg8H/U88fo66k=
+github.com/eyJhb/gomabot v0.0.0-20240531151840-007ec63a476c/go.mod h1:lTKW5GEVTn+wmp3nI4cdxBBGfZxDvwGntScKz+uxVmI=
 github.com/godbus/dbus/v5 v5.0.4/go.mod h1:xhWf0FNVPg57R7Z0UbKHbJfkEywrmjJnf7w5xrFpKfA=
 github.com/hbollon/go-edlib v1.6.0 h1:ga7AwwVIvP8mHm9GsPueC0d71cfRU/52hmPJ7Tprv4E=
 github.com/hbollon/go-edlib v1.6.0/go.mod h1:wnt6o6EIVEzUfgbUZY7BerzQ2uvzp354qmS2xaLkrhM=

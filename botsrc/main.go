@@ -9,7 +9,6 @@ import (
 	"strings"
 	"syscall"
 
-	gobot "github.com/eyJhb/gomabot/gomabot"
 	"github.com/eyJhb/nixbotbot/botsrc/nixbot"
 	"github.com/rs/zerolog/log"
 	"gopkg.in/yaml.v3"
@@ -93,7 +92,7 @@ func main() {
 func run(conf config) error {
 	ctx := context.Background()
 
-	botOpts := gobot.MatrixBotOpts{
+	botOpts := gomabot.MatrixBotOpts{
 		Homeserver: conf.Homeserver,
 		PickleKey:  []byte(conf.PickleKey),
 
@@ -106,7 +105,7 @@ func run(conf config) error {
 		Database: fmt.Sprintf("%s/%s", conf.StateDir, "mautrix-database.db"),
 	}
 
-	bot, err := gobot.NewMatrixBot(ctx, botOpts)
+	bot, err := gomabot.NewMatrixBot(ctx, botOpts)
 	if err != nil {
 		return err
 	}

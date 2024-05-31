@@ -1,6 +1,6 @@
 {
   imports = [
     ./module.nix
-    ./config.nix
+    ./config2.nix
   ];
 }

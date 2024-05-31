@@ -52,7 +52,7 @@ in {
 
     systemd.services.matrix-bot = {
       enable = true;
-      path = with pkgs; [ bash jq ];
+      path = with pkgs; [ bash jq nix nixfmt ];
       restartTriggers = [ configFile ];
       serviceConfig = {
         # DynamicUser = true;
@@ -60,6 +60,8 @@ in {
         Group = "matrix-bot";
         EnvironmentFile = lib.mkIf (cfg.environmentFile != null) cfg.environmentFile;
         # StateDirectory = cfg.stateDir;
+        Restart = "on-failure";
+        RestartSec = "5s";
       };
 
       script = ''

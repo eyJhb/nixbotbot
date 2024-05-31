@@ -26,6 +26,12 @@ in {
     vim
   ];
 
+  zramSwap = {
+    enable = true;
+    memoryPercent = 75;
+    algorithm = "lz4";
+  };
+
   users.users.root.openssh.authorizedKeys.keys = [
     # change this to your ssh key
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPuma8g+U8Wh+4mLvZoV9V+ngPqxjuIG4zhsbaTeXq65 eyjhb@chronos"
