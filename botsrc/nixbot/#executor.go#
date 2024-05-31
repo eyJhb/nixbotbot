@@ -1,0 +1,50 @@
+package nixbot
+
+import (
+	"bytes"
+	"context"
+	"os/exec"
+	"time"
+)
+
+type executorError struct {
+	Err              error
+	DeadlineExceeded bool
+	Stdout           string
+	Stderr           string
+}
+
+func (e executorError) Error() string {
+	return ""
+}
+
+func executeCommand(ctx context.Context, timeout time.Duration, cmd string, args []string) (string, string, error) {
+	// set timeout
+	cmdCtx, cancelFunc := context.WithTimeout(ctx, timeout)
+	defer cancelFunc()
+
+	// setup command
+	c := exec.CommandContext(cmdCtx,
+		cmd, args...,
+	)
+
+	stderr := c.Run()
+	if err != nil {
+		var deadlineExceeded bool
+		if err.Error() == "signal: killed" {
+			deadlineExceeded = true
+		}
+
+		ee := executorError{
+			Err:              err,
+			Stdout:           stderr.String(),
+			Stderr:           stderr.String(),
+			DeadlineExceeded: deadlineExceeded,
+		}
+
+		return "", "", ee
+	}
+
+	return stdout.String(), stderr.String(), nil
+
+}
