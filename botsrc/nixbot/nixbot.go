@@ -62,6 +62,7 @@ func (nb *NixBot) Run(ctx context.Context) {
 	// nb.Bot.AddEventHandlerFormattedBody(`(?s)^,\s*(?P<key>[A-z0-9_ ]+)\s*(\<.*(?P<user>@[a-z0-9-_\.]+:[^"]+).*\>)?$`, mwr(nb.CommandHandlerReplSimple))
 	nb.Bot.AddEventHandlerFormattedBody(`(?s)^,\s*(?P<key>[A-z0-9_ ]+)\s*(\<.*\/(?P<user>@[a-z0-9-_\.]+:[^"]+).*\>)?$`, mwr(nb.CommandHandlerReplSimple))
 
+	nb.Bot.AddEventHandler(`(?s)^,\s*(?P<show>:x)\s*(?P<key>[A-z0-9_]+)`, mwr(nb.CommandHandlerShowReplVariable))
 	nb.Bot.AddEventHandler(`(?s)^,\s*(?P<key>[A-z0-9_]+)\s*=(?P<expr>.+)`, mwr(nb.CommandHandlerAddReplVariable))
 	nb.Bot.AddEventHandler(`(?s)^,\s*(?P<key>[A-z0-9_]+)\s*=`, mwr(nb.CommandHandlerRemoveReplVariable))
 	nb.Bot.AddEventHandler(`(?s)^,\s*(?P<strict>:p)?(?P<expr>.+)`, mwr(mwt(5*time.Second, nb.CommandHandlerRepl)))

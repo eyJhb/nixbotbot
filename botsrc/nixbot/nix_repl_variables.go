@@ -16,6 +16,24 @@ var (
 	ErrReplVariableEmptyKeyOrExpr = errors.New("key or expr cannot be empty")
 )
 
+func (nb *NixBot) CommandHandlerShowReplVariable(ctx context.Context, client *mautrix.Client, evt *event.Event) error {
+	vars := nb.vars(ctx)
+	key := strings.TrimSpace(vars["key"])
+
+	v, ok := nb.ReplVariables[key]
+	if !ok {
+		return nb.SendTextReply(ctx, client, evt, []byte(fmt.Sprintf("variable '%s' is not defined", key)))
+	}
+
+	// format value
+	fv, err := nb.FormatNix(ctx, v)
+	if err != nil {
+		return err
+	}
+
+	return nb.SendTextReply(ctx, client, evt, []byte(fmt.Sprintf("%s = %s", key, fv)))
+}
+
 func (nb *NixBot) CommandHandlerAddReplVariable(ctx context.Context, client *mautrix.Client, evt *event.Event) error {
 	vars := nb.vars(ctx)
 	key := strings.TrimSpace(vars["key"])
@@ -30,7 +48,7 @@ func (nb *NixBot) CommandHandlerAddReplVariable(ctx context.Context, client *mau
 		return err
 	}
 
-	return nb.SendTextReply(ctx, client, evt, []byte(fmt.Sprintf("Defined key %s", key)))
+	return nb.SendTextReply(ctx, client, evt, []byte(fmt.Sprintf("Defined variable %s", key)))
 }
 
 func (nb *NixBot) CommandHandlerRemoveReplVariable(ctx context.Context, client *mautrix.Client, evt *event.Event) error {
@@ -46,7 +64,7 @@ func (nb *NixBot) CommandHandlerRemoveReplVariable(ctx context.Context, client *
 		return err
 	}
 
-	return nb.SendTextReply(ctx, client, evt, []byte(fmt.Sprintf("Undefined key %s", key)))
+	return nb.SendTextReply(ctx, client, evt, []byte(fmt.Sprintf("Undefined variable %s", key)))
 }
 
 func (nb *NixBot) LoadNixReplVariablesFile() error {
