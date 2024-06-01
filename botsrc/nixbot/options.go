@@ -30,6 +30,7 @@ type NixOption struct {
 	Loc         []string `json:"loc"`
 	ReadOnly    bool     `json:"readOnly"`
 	Type        string   `json:"type"`
+	OptionsLink string   `json:"options_link"`
 }
 
 type NixOptionName struct {
@@ -64,7 +65,7 @@ func (nb *NixBot) FetchNixOSOptions(ctx context.Context) (map[string]NixOption, 
                      };
 
             }).optionsJSON;
-	      in runCommandLocal "options.json" {inherit opts; } "cp $opts/share/doc/nixos/options.json $out"
+	      in pkgs.runCommandLocal "options.json" {inherit opts; } ''${pkgs.jq}/bin/jq '. | to_entries | map(.key as $key | .value.options_link |= "https://search.nixos.org/options?channel=unstable&query=" + ($key | @uri) ) | from_entries' $opts/share/doc/nixos/options.json > $out''
 		`,
 	)
 
@@ -88,10 +89,9 @@ func (nb *NixBot) FetchHomeManagerOptions(ctx context.Context) (map[string]NixOp
 	    let
 	      pkgs = import <nixpkgs> {};
 	      optionsJSON = docs.json;
-	    in pkgs.runCommandLocal "options.json" {inherit optionsJSON; } "cp $optionsJSON/share/doc/home-manager/options.json $out"
+	    in pkgs.runCommandLocal "options.json" {inherit optionsJSON; } ''${pkgs.jq}/bin/jq '. | to_entries | map(.key as $key | .value.options_link |= "https://nix-community.github.io/home-manager/options.xhtml#opt-" + ($key | gsub("[*<>]"; "_")) ) | from_entries' $optionsJSON/share/doc/home-manager/options.json > $out''
 		`,
 	)
-	// in pkgs.runCommandLocal "options.json" {inherit optionsJSON; } "${pkgs.jq}/bin/jq '. | to_entries | map(.value.declarations |= map(.url)) | from_entries' $optionsJSON/share/doc/home-manager/options.json > $out"
 
 	return nb.FetchOptions(ctx, "home-manager", cmd)
 }

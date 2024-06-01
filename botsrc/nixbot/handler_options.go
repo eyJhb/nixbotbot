@@ -16,7 +16,7 @@ import (
 var (
 	tmplNixOptions = template.Must(template.New("nix-options").Parse(`
 {{- range $v := .}}
-- [{{html $v.Name}}](https://search.nixos.org/options?channel=unstable&query={{$v.Name}})
+- [{{html $v.Name}}]({{ .NixOption.OptionsLink }})
 {{- end -}}
 `))
 
@@ -39,8 +39,9 @@ var (
 
 **Declared in** [{{ (index .NixOption.Declarations 0).Name }}]({{ (index .NixOption.Declarations 0).URL }})
 
+**Option page** [{{ html .Name }}]({{ .NixOption.OptionsLink }})
+
 			`))
-	// **Options page** [NixOS Options](https://search.nixos.org/options?channel=unstable&query={{.Name}})
 )
 
 func (nb *NixBot) CommandHandlerSearchOptions(ctx context.Context, client *mautrix.Client, evt *event.Event) error {
