@@ -10,6 +10,8 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/eyJhb/gomabot v0.0.0-20240531151840-007ec63a476c h1:M4NvRnUPQNLJN4C61Y7Ca0n4US2YlMJg8H/U88fo66k=
 github.com/eyJhb/gomabot v0.0.0-20240531151840-007ec63a476c/go.mod h1:lTKW5GEVTn+wmp3nI4cdxBBGfZxDvwGntScKz+uxVmI=
+github.com/eyJhb/gomabot v0.0.0-20240603075610-561affa039cf h1:cstt0yf32fl/zLUu0kAUV5C/v/onKKwE2ALClT9gTnY=
+github.com/eyJhb/gomabot v0.0.0-20240603075610-561affa039cf/go.mod h1:lTKW5GEVTn+wmp3nI4cdxBBGfZxDvwGntScKz+uxVmI=
 github.com/godbus/dbus/v5 v5.0.4/go.mod h1:xhWf0FNVPg57R7Z0UbKHbJfkEywrmjJnf7w5xrFpKfA=
 github.com/hbollon/go-edlib v1.6.0 h1:ga7AwwVIvP8mHm9GsPueC0d71cfRU/52hmPJ7Tprv4E=
 github.com/hbollon/go-edlib v1.6.0/go.mod h1:wnt6o6EIVEzUfgbUZY7BerzQ2uvzp354qmS2xaLkrhM=

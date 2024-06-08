@@ -14,5 +14,5 @@ in pkgs.buildGoModule rec {
     nix
   ];
 
-  vendorHash= "sha256-hoq88KUaKD+YUKHfKdFaVXTZzz7XJ5S4wWxhGZoVw4A=";
+  vendorHash= "sha256-JKi4QTKr9skT6iP7dyC6lzrxEzdrzVQKDcH5j1nSDMM=";
 }
