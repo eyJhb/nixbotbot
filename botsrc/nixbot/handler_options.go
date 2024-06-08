@@ -89,7 +89,12 @@ func (nb *NixBot) CommandHandlerSearchOption(ctx context.Context, client *mautri
 		return err
 	}
 
-	filteredOption := nb.NixOptionsFuzzySearch(search, nixOptions, 1)[0]
+	var filteredOption NixOptionName
+	if v, ok := nixOptions[search]; ok {
+		filteredOption = NixOptionName{Name: search, NixOption: v}
+	} else {
+		filteredOption = nb.NixOptionsFuzzySearch(search, nixOptions, 1)[0]
+	}
 
 	var buf bytes.Buffer
 	err = tmplNixOption.Execute(&buf, filteredOption)
