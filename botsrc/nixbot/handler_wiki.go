@@ -39,6 +39,7 @@ func (nb *NixBot) CommandHandlerSearchWiki(ctx context.Context, client *mautrix.
 	q.Add("srprop", "sectiontitle|snippet")
 	q.Add("srinfo", "")
 	q.Add("format", "json")
+	q.Add("srwhat", "text")
 	q.Add("srsearch", vars["search"])
 	req.URL.RawQuery = q.Encode()
 
