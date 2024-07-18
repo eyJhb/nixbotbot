@@ -30,6 +30,7 @@ func (nb *NixBot) CommandHandlerHelp(ctx context.Context, client *mautrix.Client
   - All expressions are passed through a ` + "`" + "_show" + "`" + ` function, which can be used to make the output pretty. The function can be overriden like any other variable
 - , <key> = <nix-expr> - adds a variable that is available when evaluating nix expressions
 - , <key> = - unsets a variable previously set
+- , :x <key> - Print definition of a variable previously set
 
 It is also possible to evaluate a codeblock, this is done by sending a message that starts with ` + "`" + "eval" + "`" + `, and then a nix codeblock.
 
