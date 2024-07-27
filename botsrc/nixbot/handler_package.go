@@ -44,6 +44,7 @@ func (nb *NixBot) CommandHandlerSearchPackages(ctx context.Context, client *maut
 		"nix", "search",
 		"-I", "nixpkgs=channel:nixos-unstable",
 		"--json",
+		"--",
 		"nixpkgs",
 		search,
 	)
