@@ -43,5 +43,10 @@ in {
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGee4uz+HDOj4Y4ANOhWJhoc4mMLP1gz6rpKoMueQF2J rendal@popper"
   ];
 
+  nixpkgs.config.permittedInsecurePackages= [
+    "olm-3.2.16"
+  ];
+
+
   system.stateVersion = "24.05";
 }
