@@ -33,6 +33,8 @@ in {
     algorithm = "lz4";
   };
 
+  nix.gc.automatic = true;
+
   users.users.root.openssh.authorizedKeys.keys = [
     # eyjhb
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPuma8g+U8Wh+4mLvZoV9V+ngPqxjuIG4zhsbaTeXq65 eyjhb@chronos"
